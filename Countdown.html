@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Countdown Conundrum</title>
+        <link rel="icon" type="image/x-icon" href="Favicon/Timer.png">
+        <link rel="stylesheet" type="text/css" href="Countdown.css">
+        <script src="Countdown.js"></script>
+    </head>
+
+    <body>
+
+        <h1>Countdown Conundrum</h1>
+
+        <div class="Container">
+
+        <div class="Middle">
+
+        <div class="RulesTitle">
+        <p1><u>Rules of the Game:</u></p1>
+        </div>
+
+        <br>
+
+        <div class="Rules">
+            <li>Click the Button for the Game that you want to play</li>
+            <li>The timer begins counting</li>
+            <li>You will have to guess 5 randomly shuffled words</li>
+            <li>The shuffled word will appear in the middle of the screen</li>
+            <li>Then you have to enter your Guess in the Textbox below</li>
+            <li>Click the Check button to check if your Guess is correct</li>
+            <li>You Win the game when you guess 5 words correctly</li>
+        </div>
+
+        <br><br>
+
+        <div class="Word" id="Word">_ _ _ _ _</div>
+        <br><br><br>
+        <div class="Game">
+            <div class="Correct">Correct:<br>
+                <div id="Counter">0</div>
+            </div>
+        <br><br>
+        <input type="text" id="Guess" placeholder="Guess"></input>
+        <br><br>
+        <input type="button" id="Check" value="Check" onclick="Check()"></input>
+        <br><br>
+        </div>
+
+        </div>
+
+        <div class="Middle">
+        <img src="img/Countdown.jpg" alt="Countdown" width="450px" height="350px"></img> <!-- Image Taken From https://www.dock10.co.uk/assets/img/news/countdown-marks-its-6000th-episode-md.jpg -->
+        <br><br>
+        <div class="Timer">
+            <h1 id="Timer">00:00:00</h1>
+        </div>
+        <br><br>
+        <div class="GameSelect">
+            <input type="button" id="5-Letter" value="5-Letter" onclick="Game(5)"></input>
+            <input type="button" id="7-Letter" value="7-Letter" onclick="Game(7)"></input>
+            <input type="button" id="9-Letter" value="9-Letter" onclick="Game(9)"></input>
+            <input type="button" id="Mixed-Letter" value="Mixed" onclick="Game('Any')"></input>
+            <br><br><br>
+        </div>
+        </div>
+
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,93 @@
+HTML{
+    background-color: #070055;
+}
+
+.Container {
+    display: flex;
+}
+
+.Middle {
+    flex: 1;
+}
+.Middle:first-child {
+    margin-right: 0px;
+}
+
+.RulesTitle {
+    text-align: center;
+}
+
+.Rules li {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 18px;
+    text-align: left;
+    margin-left: 90px;
+}
+
+body {
+    color: beige;
+    text-align: center;
+}
+
+h1 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 50px;
+}
+
+p1 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 20px;
+}
+
+p3 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 15px;
+}
+
+.GameSelect input[type="button"] {
+    font-size: 25px;
+    color: beige;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: blue;
+    border: 0px;
+    border-radius: 5px;
+}
+
+.GameSelect input[type="button"].disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.Word {
+    font-size: 65px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+}
+
+.Game input[type="text"] {
+    font-size: 25px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    border: 0px;
+    border-radius: 5px;
+}
+
+.Game input[type="button"] {
+    font-size: 40px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border: 0px;
+    border-radius: 5px;
+    background-color: blue;
+    color: beige;
+}
+
+.Correct {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 30px;
+    color: beige;
+}
+
+.Counter {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 30px;
+    color: beige;
+}
