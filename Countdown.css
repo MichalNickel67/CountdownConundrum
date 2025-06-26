@@ -1,4 +1,4 @@
-/* ===== Reset and Base ===== */
+/* ===== Reset & Base Layout ===== */
 * {
   box-sizing: border-box;
 }
@@ -7,12 +7,12 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-  background-color: #0e1128; /* Very dark navy blue */
-  color: #e0e6f8;            /* Light desaturated blue text */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0f1322;
+  color: #F5F0CD;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -20,7 +20,7 @@ body {
 
 /* ===== Navbar ===== */
 .navbar {
-  background-color: #101e40;
+  background-color: #3674B5;
   padding: 1rem 2rem;
 }
 
@@ -40,51 +40,39 @@ body {
 .navbar-nav .nav-link {
   font-weight: bold;
   font-size: 1rem;
-  color: #cfd8ff !important;
+  color: #FADA7A !important;
   margin-right: 1rem;
   transition: color 0.4s;
 }
 
-/* PLAY link with animated glowing color text */
+.navbar-nav .nav-link:hover {
+  color: #ffffff !important;
+}
+
+/* Glowing PLAY link text animation */
 .navbar-nav .nav-link.play-highlight {
   font-weight: bold;
-  background: linear-gradient(90deg, #00cfff, #1e90ff, #00cfff);
+  background: linear-gradient(270deg, #FADA7A, #578FCA, #FADA7A);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: glowingText 5s linear infinite;
+  animation: glowingText 4s ease infinite;
 }
 
 @keyframes glowingText {
-  0% {background-position: 0%;}
-  50% {background-position: 100%;}
-  100% {background-position: 0%;}
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-/* ===== Footer ===== */
-footer {
-  background-color: #101e40;
-  color: #cfd8ff;
-  padding: 1.5rem 0;
-  text-align: center;
-  font-size: 1rem;
-  font-weight: bold;
-  margin-top: auto;
-}
-
-/* ===== Page Content ===== */
-main {
-  flex: 1;
-}
-
-/* ===== Cards ===== */
+/* ===== Card Layout ===== */
 .card-custom {
-  background-color: #1a1e3a;
-  color: #e0e6f8;
+  background-color: #1a1f36;
+  color: #F5F0CD;
   border: none;
   border-radius: 0.75rem;
   padding: 1.5rem;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
   margin-bottom: 2rem;
 }
 
@@ -103,4 +91,51 @@ main {
 .card-custom h2 {
   font-weight: bold;
   margin-bottom: 1rem;
+}
+
+/* ===== Footer ===== */
+footer {
+  font-weight: bold;
+}
+
+footer .top-footer {
+  background-color: #578FCA;
+  color: #0f1322;
+}
+
+footer .middle-footer {
+  background-color: #3674B5;
+  color: #ffffff;
+}
+
+footer .bottom-footer {
+  background-color: #10131d;
+  color: #FADA7A;
+}
+
+footer a {
+  color: #FADA7A;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Responsive Layout ===== */
+main {
+  flex: 1;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+button {
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
 }
