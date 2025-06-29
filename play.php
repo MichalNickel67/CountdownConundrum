@@ -22,7 +22,7 @@
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark shadow-sm" style="background-color: #102044;">
   <div class="container">
-    <a class="navbar-brand d-flex align-items-center fw-bold fs-5" href="#">
+    <a class="navbar-brand d-flex align-items-center fw-bold fs-5" href="index.html">
       <img src="Favicon/Timer.png" alt="Logo" width="40" height="40" class="me-2">
       Countdown Conundrum
     </a>
@@ -31,8 +31,8 @@
     </button>
     <div class="collapse navbar-collapse" id="mainNavbar">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link fw-bold fs-6 active" href="play.html">Play</a></li>
-        <li class="nav-item"><a class="nav-link fw-bold fs-6" href="index.html">Rules</a></li>
+        <li class="nav-item"><a class="nav-link active fw-bold fs-6" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link fw-bold fs-6" href="play.html">Play</a></li>
         <li class="nav-item"><a class="nav-link fw-bold fs-6" href="login.html">Log In</a></li>
       </ul>
     </div>
@@ -79,40 +79,40 @@
 </main>
 
 <!-- FOOTER -->
-<footer class="text-light pt-5 border-top border-secondary" style="background-color: #102044;">
+<footer class="text-light pt-5" style="background-color: #102044;">
   <div class="container">
     <div class="row">
 
       <!-- About -->
       <div class="col-md-4 mb-4">
         <h5 class="fw-bold mb-3"><i class="fas fa-clock me-2 text-warning"></i>Countdown Conundrum</h5>
-        <p>
+        <p class="fw-bold">
           A high-paced, brain-teasing word puzzle game inspired by the classic TV show. Beat the timer, unscramble the word, and test your brain!
         </p>
       </div>
 
       <!-- Pages -->
-      <div class="col-md-2 mb-4">
+      <div class="col-md-3 mb-4">
         <h6 class="fw-bold mb-3">Pages</h6>
-        <ul class="list-unstyled">
-          <li><a href="index.html" class="text-reset text-decoration-none">Rules</a></li>
-          <li><a href="play.html" class="text-reset text-decoration-none">Play</a></li>
-          <li><a href="login.html" class="text-reset text-decoration-none">Log In</a></li>
+        <ul class="list-unstyled fw-bold">
+          <li><a href="index.html" class="text-reset text-decoration-underline">Home</a></li>
+          <li><a href="play.html" class="text-reset text-decoration-underline">Play</a></li>
+          <li><a href="login.html" class="text-reset text-decoration-underline">Log In</a></li>
         </ul>
       </div>
 
       <!-- Contact -->
       <div class="col-md-3 mb-4">
         <h6 class="fw-bold mb-3">Contact</h6>
-        <p><i class="fas fa-map-marker-alt me-2 text-warning"></i> Nottingham, UK</p>
-        <p><i class="fas fa-envelope me-2 text-warning"></i> support@countdowngame.com</p>
-        <p><i class="fas fa-phone me-2 text-warning"></i> +44 123 456 789</p>
+        <p class="fw-bold"><i class="fas fa-map-marker-alt me-2 text-warning"></i> Nottingham, UK</p>
+        <p class="fw-bold"><i class="fas fa-envelope me-2 text-warning"></i> support@countdowngame.com</p>
+        <p class="fw-bold"><i class="fas fa-phone me-2 text-warning"></i> +44 123 456 789</p>
       </div>
 
       <!-- Social -->
-      <div class="col-md-3 mb-4">
+      <div class="col-md-2 mb-4">
         <h6 class="fw-bold mb-3 text-center">Follow us</h6>
-        <div class="d-flex justify-content-center gap-4 fs-4">
+        <div class="d-flex justify-content-center gap-3 fs-4">
           <a href="https://facebook.com" class="text-reset"><i class="fab fa-facebook-f"></i></a>
           <a href="https://twitter.com" class="text-reset"><i class="fab fa-twitter"></i></a>
           <a href="https://instagram.com" class="text-reset"><i class="fab fa-instagram"></i></a>
