@@ -20,28 +20,58 @@ var CorrectSound = new Audio('Audio/CorrectSound.mp3');
 var IncorrectSound = new Audio('Audio/IncorrectSound.mp3');
 // Incorrect Sound Audio from https://youtu.be/4GSXyo3euR4
 
+// Timer variables for milliseconds tracking
+var startTime;
+var elapsedTime = 0;
+
 function Game(wordlength) {
-    if (PlayGame && wordlength == 5) {
-        words = new Array ("Curve","Price","Horse","Pizza","Daily","Quick","Crazy","Anger","Audio","Basic","Boost","Alarm","Dream","Arena","Apple","Bacon","Baker","Beach","Beast","Clock");
+    if (!PlayGame) return;
+
+    let lengthParam = wordlength;
+
+    fetch('connection.php?length=${lengthParam}')
+        .then(response => response.json())
+        .then(data => {
+            if (data.length === 0) {
+                alert("No words found for this length.");
+                return;
+            }
+            words = data.map(word => word.toUpperCase());
+
+            ResetGameState();
+            CountdownAudioPlay();
+            DisableButtons();
+            Timer();
+            StartTimer();
+            TimerStarted = true;
+            Randomiser();
+        })
+        .catch(error => {
+            console.error("Error fetching words:", error);
+        });
+}
+
+function ResetGameState() {
+    // Reset all counters and game state
+    Correctcounter = 0;
+    TotalAttempts = 0;
+    CorrectAttempts = 0;
+    elapsedTime = 0;
+    PlayGame = true;
+    
+    // Reset counter display
+    document.getElementById("Counter").innerHTML = "0";
+    
+    // Reset input field
+    document.getElementById("Guess").value = "";
+    document.getElementById("Guess").placeholder = "Enter your guess...";
+    
+    // Stop any existing timer
+    if (TimerInterval) {
+        clearInterval(TimerInterval);
     }
-    else if (PlayGame && wordlength == 7) {
-        words = new Array ("Balance","Academy","Battery","Airport","Alcohol","Brother","Classic","College","Diamond","Digital","Display","Company","Fashion","Gallery","Fishing","Freedom");
-    }
-    else if (PlayGame && wordlength == 9) {
-        words = new Array ("Apologise","Appetiser","Bookshelf","Bumblebee","Champagne","Checklist","Chopstick","Clownfish","Explosive","Injection","Jailbreak","Factorise");
-    }
-    else if (PlayGame && wordlength == 'Any') {
-        words = new Array ("Apologise","Appetiser","Bookshelf","Bumblebee","Champagne","Checklist","Chopstick","Clownfish","Explosive","Injection","Jailbreak","Factorise",
-        "Balance","Academy","Battery","Airport","Alcohol","Brother","Classic","College","Diamond","Digital","Display","Company","Fashion","Gallery","Fishing","Freedom",
-        "Horse","Pizza","Daily","Quick","Crazy","Audio","Alarm","Dream","Arena","Apple","Baker","Beach","Beast","Clock");
-    }
-    else {}
-        DisableButtons();
-        CountdownAudioPlay()
-        Timer();
-        StartTimer();
-        TimerStarted = true;
-        Randomiser();
+    
+    console.log("Game state reset - Counter: " + Correctcounter);
 }
 
 function DisableButtons() {
@@ -59,20 +89,24 @@ function EnableButtons() {
 }
 
 function CountdownAudioPlay() {
-  CountdownStarted = true;
-  CountdownAudio.play();
+    CountdownStarted = true;
+    CountdownAudio.play();
 }
+
 function CountdownAudioStop() {
-  CountdownStarted = false;
-  CountdownAudio.pause();
-  CountdownAudio.currentTime = 0;
+    CountdownStarted = false;
+    CountdownAudio.pause();
+    CountdownAudio.currentTime = 0;
 }
+
 function CountdownAudioEnd() {
     CountdownEnding.play();
 }
+
 function CorrectAudio() {
     CorrectSound.play();
 }
+
 function IncorrectAudio() {
     IncorrectSound.play();
 }
@@ -102,39 +136,78 @@ function EndGame() {
     StopTimer();
     CountdownAudioEnd();
     PlayGame = false;
-	console.log(PlayGame)
+    
+    // Calculate final time
+    var finalTime = GetFormattedTime();
+    var accuracy = TotalAttempts > 0 ? Math.round((CorrectAttempts / TotalAttempts) * 100) : 0;
+    
+    // Create celebration message
+    var celebrationMessage = GetCelebrationMessage(finalTime, accuracy);
+    
+    console.log(PlayGame);
     YouWin = document.getElementById("Word");
-    YouWin.innerHTML = "YOU WIN! You Took "+ minutes +" mins and "+ seconds +" secs";
+    YouWin.innerHTML = celebrationMessage;
     EnableButtons();
-  }  
+}
+
+function GetCelebrationMessage(timeStr, accuracy) {
+    var emoji = "";
+    var message = "";
+    
+    // Time-based messages
+    if (elapsedTime < 30000) { // Less than 30 seconds
+        emoji = "🚀";
+        message = "LIGHTNING FAST!";
+    } else if (elapsedTime < 60000) { // Less than 1 minute
+        emoji = "⚡";
+        message = "INCREDIBLE SPEED!";
+    } else if (elapsedTime < 120000) { // Less than 2 minutes
+        emoji = "🔥";
+        message = "GREAT TIMING!";
+    } else {
+        emoji = "💪";
+        message = "WELL DONE!";
+    }
+    
+    var finalMessage = `${emoji} ${message}<br>` +
+                      `Time: ${timeStr}<br>` +
+                      `Accuracy: ${accuracy}%<br>` +
+                      `Score: ${CorrectAttempts}/${TotalAttempts}`;
+    
+    return finalMessage;
+}
 
 function StopTimer() {
-    clearInterval(TimerInterval);
+    if (TimerInterval) {
+        clearInterval(TimerInterval);
+        TimerInterval = null;
+    }
 }
 
 function Timer() {
     TimerDisplay = document.getElementById("Timer");
-    seconds = 0;
-    minutes = 0;
-    hours = 0;
+    startTime = Date.now();
+    elapsedTime = 0;
 }
 
 function StartTimer() {
     TimerInterval = setInterval(function() {
-        seconds++;
-        if (seconds === 60) {
-            minutes++;
-            seconds = 0;
-        }
-        else if (minutes === 60) {
-            hours++;
-            minutes = 0;
-        }
-        StringHour = hours < 10 ? "0" + hours : hours;
-        StringMins = minutes < 10 ? "0" + minutes : minutes;
-        StringSecs = seconds < 10 ? "0" + seconds : seconds;
-        TimerDisplay.textContent = StringHour + ":" + StringMins + ":" + StringSecs;
-    }, 1000);
+        elapsedTime = Date.now() - startTime;
+        TimerDisplay.textContent = GetFormattedTime();
+    }, 10); // Update every 10ms for smooth millisecond display
+}
+
+function GetFormattedTime() {
+    var totalMs = elapsedTime;
+    var minutes = Math.floor(totalMs / 60000);
+    var seconds = Math.floor((totalMs % 60000) / 1000);
+    var milliseconds = Math.floor((totalMs % 1000) / 10); // Display centiseconds (2 digits)
+    
+    var StringMins = minutes < 10 ? "0" + minutes : minutes;
+    var StringSecs = seconds < 10 ? "0" + seconds : seconds;
+    var StringMs = milliseconds < 10 ? "0" + milliseconds : milliseconds;
+    
+    return StringMins + ":" + StringSecs + ":" + StringMs;
 }
 
 function CorrectCounter() {
@@ -156,7 +229,6 @@ function Validation() {
         if (Correctcounter == 5) {
             CountdownAudioStop();
             EndGame();
-            Count = 0; //not sure why counter is not reseting
         }
         else {
             Randomiser(); 
@@ -168,7 +240,6 @@ function Validation() {
         TotalAttempts++;
         IncorrectAudio();
     }
-    
 }
 
 function Check() {
@@ -177,4 +248,3 @@ function Check() {
     PlayerGuess = PlayerGuess.toUpperCase();
     Validation();
 }
-  
