@@ -26,10 +26,9 @@ var elapsedTime = 0;
 
 function Game(wordlength) {
     if (!PlayGame) return;
-
     let lengthParam = wordlength;
 
-    fetch('connection.php?length=${lengthParam}')
+    fetch(`connection.php?length=${lengthParam}`)
         .then(response => response.json())
         .then(data => {
             if (data.length === 0) {

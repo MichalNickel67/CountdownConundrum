@@ -13,6 +13,8 @@
 
   <link rel="stylesheet" href="Countdown.css">
   <link rel="icon" href="Favicon/Timer.png" type="image/x-icon">
+
+  <? include "connection.php"; ?>
 </head>
 
 <body class="bg-dark text-light">
